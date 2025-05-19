@@ -1,7 +1,11 @@
 # BERLIN ENTWICKLUNGSMAP
 
-**Team:** Ghamdan Alsufyani  
+**Teammitglied_1:** Ghamdan Alsufyani  
 **Matrikelnummer:** s0581251
+
+
+**Teammitglied_2:** Ibrahim Al-Amodi 
+**Matrikelnummer:** s0574903
 
 ## Beschreibung
 

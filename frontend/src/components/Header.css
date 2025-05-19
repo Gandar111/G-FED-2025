@@ -1,0 +1,34 @@
+.app-header {
+    position: relative;
+    background: linear-gradient(135deg, #003366 0%, #00c6ff 100%); /* ➡ Blau zu Türkis Verlauf */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem 6rem; /* ➡ Platz für Welle unten */
+    text-align: center;
+    overflow: hidden;
+}
+
+.app-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.app-logo {
+    height: 150px;
+    margin-right: 1px;
+}
+
+/* Welle hinzufügen */
+.app-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: deeppink;
+    clip-path: polygon(0 700%, 100% 20%, 70% 100%, 0% 60%); /* ➡ Schräge Welle links unten → rechts oben */
+}

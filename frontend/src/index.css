@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+                           /* ➡️ Abstand zum Rand */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: lightskyblue;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    color: #003366;
+
+    line-height: 1.5;                        /* ➡️ mehr Luft */
+}

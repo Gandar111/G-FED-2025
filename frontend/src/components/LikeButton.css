@@ -1,0 +1,15 @@
+.like-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #0055aa;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.like-button:hover {
+    background-color: #003366;
+}
