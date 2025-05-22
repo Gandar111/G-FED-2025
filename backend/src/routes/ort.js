@@ -13,7 +13,7 @@ async function connectToDatabase() {
     return client.db('locationdb').collection('locations');
 }
 
-// ✅ GET: Alle Locations zurückgeben (wichtig für React)
+//GET: Alle Locations
 router.get('/', async function (req, res) {
     try {
         const collection = await connectToDatabase();
@@ -25,7 +25,7 @@ router.get('/', async function (req, res) {
     }
 });
 
-// ✅ GET: Ein Location-Dokument anhand des Namens suchen (optional)
+// GET: Ein Location-Dokument anhand des Namens suchen
 router.get('/search', async function (req, res) {
     try {
         const collection = await connectToDatabase();
@@ -43,7 +43,7 @@ router.get('/search', async function (req, res) {
     }
 });
 
-// ✅ DELETE: Ein Location-Dokument löschen anhand des Namens
+// DELETE: Ein Location-Dokument löschen anhand des Namens
 router.delete('/', async function (req, res) {
     try {
         const collection = await connectToDatabase();
@@ -61,7 +61,7 @@ router.delete('/', async function (req, res) {
     }
 });
 
-// ✅ POST: Ein neues Location-Dokument hinzufügen
+// POST: Ein neues Location-Dokument hinzufügen
 router.post('/', async function (req, res) {
     try {
         const collection = await connectToDatabase();
