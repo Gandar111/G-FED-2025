@@ -14,7 +14,8 @@ export type Location = {
 };
 
 type Props = {
-    location: Location;
+  location: Location;
+  user: { username: string; role: string };
 };
 
 

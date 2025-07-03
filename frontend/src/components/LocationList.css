@@ -1,0 +1,15 @@
+
+.location-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.location-list h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #003366;
+}

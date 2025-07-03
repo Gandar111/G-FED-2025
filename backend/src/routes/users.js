@@ -1,49 +1,52 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
+const { MongoClient } = require("mongodb");
 
-//es ist wie in Java ein Objekt von einer Klasse zu erstellen und dann kannst du anhand dieser Variable oder diese Objekt alle Methoden der Klasse aufgerufen
-const mongoCRUDs = require('../db/mongoCRUDs');
+// Verbindungsdaten zur Datenbank
+const uri = "mongodb://locationdb_ghamdan:oIqaln3KH@mongodb1.f4.htw-berlin.de:27017/locationdb?authMechanism=DEFAULT";
 
-// Wird bei GET http://localhost:8001/users aufgerufen 
-router.get('/', async function(req, res) {
-  try {
-    //let userDoc = await mongo_cruds.findOneUser("admina", "pass1234");
-    let users = await mongoCRUDs.findAllUsers();
-    if(users)
-      res.status(200).json(users);
-    else {
-      res.status(404).send(`Users not found!`);
+// Funktion zur Verbindung mit der Benutzer-Collection
+async function connectToUserDB() {
+    const client = new MongoClient(uri);
+    await client.connect();
+    return client.db('locationdb').collection('users');
+}
+
+// GET: Alle Benutzer abrufen (optional für Admin)
+router.get('/', async function (req, res) {
+    try {
+        const collection = await connectToUserDB();
+        const users = await collection.find({}, { projection: { password: 0 } }).toArray();
+        res.status(200).json(users);
+    } catch (err) {
+        console.error("Fehler beim Abrufen der Benutzer:", err);
+        res.status(500).send("Internal Server Error");
     }
-  } catch (err) {
-    console.log(err);
-    res.status(400).send("Something is not right!!");
-  }
 });
 
-// Wird bei  
-// POST http://localhost:8001/users mit payload 
-// {"username":"xyz", "password":"zyx"}
-// erwartet eine payload diesen Formats ^^^
-// der Header Content-Type: application/json MUSS mitgeschickt
-// 
-router.post('/', async function(req, res) {
-  // wird automatisch in ein JS-Objekt umgewandelt, 
-  // wenn Content-Type: application/json gesetzt ist
-  let userToLogin = req.body;  
-  console.log (userToLogin);
-  //(userToLogin.username === "admina") {
-    try {
-    //let userDoc = await mongo_cruds.findOneUser("admina", "pass1234");
-    let users = await mongoCRUDs.findOneUser(userToLogin.username, userToLogin.password);
-    if(users)
-      res.status(200).json(users);
-    else {
-      res.status(404).send(`Users not found!`);
+// POST: Login-Anfrage prüfen
+router.post('/', async function (req, res) {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).send("Benutzername und Passwort erforderlich.");
     }
-  } catch (err) {
-    console.log(err);
-    res.status(400).send("Something is not right!!");
-  }
+
+    try {
+        const collection = await connectToUserDB();
+        const user = await collection.findOne({ username, password });
+
+        if (user) {
+            // Passwort nicht senden
+            delete user.password;
+            res.status(200).json(user);
+        } else {
+            res.status(401).send("Login fehlgeschlagen. Benutzer nicht gefunden.");
+        }
+    } catch (err) {
+        console.error("Fehler beim Login:", err);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 module.exports = router;

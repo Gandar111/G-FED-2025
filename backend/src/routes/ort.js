@@ -17,8 +17,8 @@ async function connectToDatabase() {
 router.get('/', async function (req, res) {
     try {
         const collection = await connectToDatabase();
-        const locations = await collection.find({}).toArray();  // ➡️ ALLE Daten holen
-        res.status(200).json(locations);                        // ➡️ Array → kein .map Fehler
+        const locations = await collection.find({}).toArray();  //ALLE Daten holen
+        res.status(200).json(locations);                        //Array → kein .map Fehler
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
@@ -67,7 +67,7 @@ router.post('/', async function (req, res) {
         const collection = await connectToDatabase();
         const result = await collection.insertOne(req.body);
 
-        res.status(201).json(result);   // ➡️ Erfolgsmeldung + MongoDB result
+        res.status(201).json(result);   // Erfolgsmeldung + MongoDB result
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");

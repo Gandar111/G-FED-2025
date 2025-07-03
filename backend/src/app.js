@@ -7,7 +7,7 @@ const locationsRouter = require('./routes/ort');
 
 const app = express();
 
-app.use(cors({                                                // ✅ cors ganz oben einfügen
+app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
