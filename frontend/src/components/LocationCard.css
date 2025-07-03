@@ -75,3 +75,16 @@
 .location-image:hover {
     transform: scale(1.02);
 }
+.delete-button {
+  background-color: #ff5555;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-button:hover {
+  background-color: #ff0000;
+}

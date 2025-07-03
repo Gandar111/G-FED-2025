@@ -44,11 +44,10 @@ router.get('/search', async function (req, res) {
 });
 
 // DELETE: Ein Location-Dokument löschen anhand des Namens
-router.delete('/', async function (req, res) {
+router.delete('/:id', async function (req, res) {
     try {
         const collection = await connectToDatabase();
-        const query = { name: req.query.name };
-        const result = await collection.deleteOne(query);
+        const result = await collection.deleteOne({ _id: new ObjectId(req.params.id) });
 
         if (result.deletedCount > 0) {
             res.status(200).send("Location deleted");
@@ -60,6 +59,7 @@ router.delete('/', async function (req, res) {
         res.status(500).send("Internal Server Error");
     }
 });
+
 
 // POST: Ein neues Location-Dokument hinzufügen
 router.post('/', async function (req, res) {
@@ -87,6 +87,27 @@ router.post('/:id/like', async function(req, res) {
         res.status(500).send("Internal Server Error");
     }
 });
+
+router.put('/:id', async function (req, res) {
+  try {
+    const collection = await connectToDatabase();
+
+    const updatedData = { ...req.body };
+    delete updatedData._id;
+
+    const result = await collection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: updatedData }
+    );
+
+    res.status(200).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Update fehlgeschlagen");
+  }
+});
+
+
 
 
 
