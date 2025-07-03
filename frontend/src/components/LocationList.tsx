@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ HINZUFÜGEN
 import LocationCard, { Location } from './LocationCard';
-import LocationForm from './LocationForm';
 import './LocationList.css';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 const LocationList: React.FC<Props> = ({ user }) => {
   const [locations, setLocations] = useState<Location[]>([]);
-  const [showForm, setShowForm] = useState(false);
+  const navigate = useNavigate(); // ✅ Hook für Navigation
 
   useEffect(() => {
     loadLocations();
@@ -20,23 +20,6 @@ const LocationList: React.FC<Props> = ({ user }) => {
       .then(res => res.json())
       .then(data => setLocations(Array.isArray(data) ? data : []))
       .catch(err => console.error('Fehler beim Laden der Locations:', err));
-  };
-
-  const handleAddLocation = (newData: Partial<Location>) => {
-    fetch('http://localhost:8001/ort', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...newData,
-        owner: user.username,
-        likes: 0,
-      }),
-    })
-      .then(res => res.json())
-      .then(() => {
-        setShowForm(false);
-        loadLocations();
-      });
   };
 
   return (
@@ -54,11 +37,8 @@ const LocationList: React.FC<Props> = ({ user }) => {
         ))}
       </div>
 
-      {/* Button am Ende */}
       <div className="add-location-section">
-        {showForm && <LocationForm onSubmit={handleAddLocation} />}
-
-        <button onClick={() => setShowForm(!showForm)} className="add-button">
+        <button onClick={() => navigate('/locations/add')} className="add-button">
           ➕ Neuer Standort
         </button>
       </div>

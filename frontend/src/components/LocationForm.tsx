@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { Location } from './LocationCard';
 
 type Props = {
-  initialData?: Partial<Location>; // für Bearbeiten optional
+  initialData?: Partial<Location>;
   onSubmit: (data: Partial<Location>) => void;
+  onCancel?: () => void; // Optional für Add/Edit
 };
 
-const LocationForm: React.FC<Props> = ({ initialData = {}, onSubmit }) => {
+const LocationForm: React.FC<Props> = ({ initialData = {}, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState<Partial<Location>>(initialData);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -19,14 +21,45 @@ const LocationForm: React.FC<Props> = ({ initialData = {}, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="name" placeholder="Name" value={formData.name || ''} onChange={handleChange} />
-      <input name="street" placeholder="Straße" value={formData.street || ''} onChange={handleChange} />
-      <input name="zip" placeholder="PLZ" value={formData.zip || ''} onChange={handleChange} />
-      <input name="city" placeholder="Stadt" value={formData.city || ''} onChange={handleChange} />
-      <input name="category" placeholder="Kategorie" value={formData.category || ''} onChange={handleChange} />
-      <input name="imageUrl" placeholder="Bild-URL" value={formData.imageUrl || ''} onChange={handleChange} />
-      <button type="submit">Speichern</button>
+    <form className="location-form" onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input name="name" required value={formData.name ?? ''} onChange={handleChange} />
+      </label>
+
+      <label>
+        Straße:
+        <input name="street" value={formData.street ?? ''} onChange={handleChange} />
+      </label>
+
+      <label>
+        PLZ:
+        <input name="zip" value={formData.zip ?? ''} onChange={handleChange} />
+      </label>
+
+      <label>
+        Stadt:
+        <input name="city" value={formData.city ?? ''} onChange={handleChange} />
+      </label>
+
+      <label>
+        Kategorie:
+        <input name="category" value={formData.category ?? ''} onChange={handleChange} />
+      </label>
+
+      <label>
+        Bild-URL:
+        <input name="imageUrl" value={formData.imageUrl ?? ''} onChange={handleChange} />
+      </label>
+
+      <div className="form-buttons">
+        <button type="submit">Speichern</button>
+        {onCancel && (
+          <button type="button" className="cancel-button" onClick={onCancel}>
+            Abbrechen
+          </button>
+        )}
+      </div>
     </form>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 type Props = {
@@ -9,6 +10,7 @@ const Login: React.FC<Props> = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const Login: React.FC<Props> = ({ onLoginSuccess }) => {
         const user = await res.json();
         localStorage.setItem('user', JSON.stringify(user));
         onLoginSuccess(user);
+        navigate('/locations');
       } else {
         setError('Login fehlgeschlagen. Bitte überprüfe die Daten.');
       }

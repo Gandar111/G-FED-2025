@@ -107,6 +107,22 @@ router.put('/:id', async function (req, res) {
   }
 });
 
+// GET /ort/:id → Eintrag nach ID zurückgeben
+router.get('/:id', async function (req, res) {
+  try {
+    const collection = await connectToDatabase();
+    const result = await collection.findOne({ _id: new ObjectId(req.params.id) });
+
+    if (!result) {
+      return res.status(404).send('Location not found');
+    }
+
+    res.status(200).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Interner Fehler beim Abrufen des Standorts");
+  }
+});
 
 
 

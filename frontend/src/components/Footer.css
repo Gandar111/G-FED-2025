@@ -1,17 +1,21 @@
 .footer {
+  margin-top: auto; /* <- schiebt Footer an das Ende */
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 1.5rem;
+  padding: 1rem 0;
   background-color: #f5f5f5;
   border-top: 1px solid #ccc;
+  font-size: 0.95rem;
 }
 
 .footer a {
   color: #333;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .footer a:hover {
+  color: #0077cc;
   text-decoration: underline;
 }
