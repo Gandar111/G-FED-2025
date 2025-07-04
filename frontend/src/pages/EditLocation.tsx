@@ -1,3 +1,5 @@
+// 📌 EditLocation-Komponente: Ermöglicht Bearbeiten eines vorhandenen Standorts anhand der ID aus der URL.
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import LocationForm from '../components/LocationForm';
@@ -10,18 +12,18 @@ type Props = {
 };
 
 const EditLocation: React.FC<Props> = ({ user }) => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>(); // Holt die Standort-ID aus der URL
   const navigate = useNavigate();
-  const [locationData, setLocationData] = useState<Partial<Location> | null>(null);
+  const [locationData, setLocationData] = useState<Partial<Location> | null>(null); // Lokaler Zustand für Standortdaten
 
   useEffect(() => {
     async function loadLocation() {
       try {
-        const res = await fetch(`http://localhost:8001/ort/${id}`);
+        const res = await fetch(`http://localhost:8001/ort/${id}`); // Holt Standortdetails vom Backend
 
         if (!res.ok) throw new Error('Not found');
         const data = await res.json();
-        setLocationData(data);
+        setLocationData(data); // Speichert geladene Daten im State
       } catch (err) {
         console.error('Fehler beim Laden der Daten:', err);
       }
@@ -33,14 +35,14 @@ const EditLocation: React.FC<Props> = ({ user }) => {
   const handleSubmit = async (updatedData: Partial<Location>) => {
     try {
       const res = await fetch(`http://localhost:8001/ort/${id}`, {
-        method: 'PUT',
+        method: 'PUT', // Sendet aktualisierte Daten an Backend
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData),
       });
 
       if (res.ok) {
         alert('Änderungen gespeichert!');
-        navigate('/locations');
+        navigate('/locations'); // Nach Erfolg zurück zur Liste
       } else {
         alert('Speichern fehlgeschlagen.');
       }
@@ -50,7 +52,7 @@ const EditLocation: React.FC<Props> = ({ user }) => {
     }
   };
 
-  if (!locationData) return <p>Lade Standortdaten...</p>;
+  if (!locationData) return <p>Lade Standortdaten...</p>; // Ladeanzeige während Daten geladen werden
 
   return (
     <div className="edit-page">
@@ -71,7 +73,7 @@ const EditLocation: React.FC<Props> = ({ user }) => {
         )}
       </div>
 
-      <LocationForm initialData={locationData} onSubmit={handleSubmit} />
+      <LocationForm initialData={locationData} onSubmit={handleSubmit} /> {/* Formular zum Bearbeiten */}
     </div>
   );
 };

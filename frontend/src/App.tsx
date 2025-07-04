@@ -1,3 +1,5 @@
+// 📌 App-Komponente: Verwaltet Login-Status und die wichtigsten Routen.
+
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -14,20 +16,20 @@ import ErrorPage from './pages/ErrorPage';
 import { User } from './types/User';
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(null); // Login-Status
 
   useEffect(() => {
-    const saved = localStorage.getItem('user');
+    const saved = localStorage.getItem('user'); // Prüft gespeicherten Nutzer beim Laden
     if (saved) setUser(JSON.parse(saved));
   }, []);
 
   const handleLoginSuccess = (userData: User) => {
-    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('user', JSON.stringify(userData)); // Speichert Nutzer nach Login
     setUser(userData);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('user'); // Löscht Login-Daten
     setUser(null);
   };
 
@@ -55,11 +57,8 @@ function App() {
             <>
               <Route path="/locations" element={<LocationList user={user} />} />
               {/*<Route path="/locations/:id" element={<LocationDetail user={user} />} />*/}
-      <Route path="/locations/edit/:id" element={<EditLocation user={user} />} />
-
-
-         <Route path="/locations/add" element={<AddLocation user={user} />} />
-
+              <Route path="/locations/edit/:id" element={<EditLocation user={user} />} />
+              <Route path="/locations/add" element={<AddLocation user={user} />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/" element={<Navigate to="/locations" replace />} />
               <Route path="*" element={<ErrorPage />} />

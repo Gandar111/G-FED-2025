@@ -1,3 +1,5 @@
+// 📌 AddLocation-Komponente: Ermöglicht es einem Benutzer, einen neuen Standort über ein Formular hinzuzufügen.
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LocationForm from '../components/LocationForm';
