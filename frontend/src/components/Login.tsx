@@ -16,7 +16,7 @@ const Login: React.FC<Props> = ({ onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:8001/users', {
+      const res = await fetch('http://13.60.78.19:8001/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

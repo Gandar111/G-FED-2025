@@ -19,7 +19,7 @@ const EditLocation: React.FC<Props> = ({ user }) => {
   useEffect(() => {
     async function loadLocation() {
       try {
-        const res = await fetch(`http://localhost:8001/ort/${id}`); // Holt Standortdetails vom Backend
+        const res = await fetch(`http://13.60.78.19:8001/ort/${id}`); // Holt Standortdetails vom Backend
 
         if (!res.ok) throw new Error('Not found');
         const data = await res.json();
@@ -34,7 +34,7 @@ const EditLocation: React.FC<Props> = ({ user }) => {
 
   const handleSubmit = async (updatedData: Partial<Location>) => {
     try {
-      const res = await fetch(`http://localhost:8001/ort/${id}`, {
+      const res = await fetch(`http://13.60.78.19:8001/ort/${id}`, {
         method: 'PUT', // Sendet aktualisierte Daten an Backend
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData),

@@ -16,7 +16,7 @@ const LocationList: React.FC<Props> = ({ user }) => {
   }, []);
 
   const loadLocations = () => {
-    fetch('http://localhost:8001/ort')
+    fetch('http://13.60.78.19:8001/ort')
       .then(res => res.json())
       .then(data => setLocations(Array.isArray(data) ? data : []))
       .catch(err => console.error('Fehler beim Laden der Locations:', err));

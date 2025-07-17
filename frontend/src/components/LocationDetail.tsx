@@ -9,7 +9,7 @@ const LocationDetail: React.FC = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:8001/ort/${id}`)
+    fetch(`http://13.60.78.19:8001/ort/${id}`)
       .then(res => {
         if (!res.ok) throw new Error('Nicht gefunden');
         return res.json();

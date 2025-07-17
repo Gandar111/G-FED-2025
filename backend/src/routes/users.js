@@ -3,8 +3,8 @@ const router = express.Router();
 const { MongoClient } = require("mongodb");
 
 // Verbindungsdaten zur Datenbank
-const uri = "mongodb://locationdb_ghamdan:oIqaln3KH@mongodb1.f4.htw-berlin.de:27017/locationdb?authMechanism=DEFAULT";
-
+//const uri = "mongodb://locationdb_ghamdan:oIqaln3KH@mongodb1.f4.htw-berlin.de:27017/locationdb?authMechanism=DEFAULT";
+const uri = "mongodb+srv://ghamdan:yFuX83JCOJZv0eqX@cluster0.kdql6tk.mongodb.net/locationdb?retryWrites=true&w=majority"
 // Funktion zur Verbindung mit der Benutzer-Collection
 async function connectToUserDB() {
     const client = new MongoClient(uri);

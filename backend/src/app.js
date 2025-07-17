@@ -8,7 +8,8 @@ const locationsRouter = require('./routes/ort');
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000'
+      origin: 'http://localhost:3000'
+    //origin: 'http://fed-cc-frontend.s3-website.eu-north-1.amazonaws.com'
 }));
 
 app.use(express.json());

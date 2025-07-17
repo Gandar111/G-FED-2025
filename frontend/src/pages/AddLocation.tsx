@@ -16,7 +16,7 @@ const AddLocation: React.FC<Props> = ({ user }) => {
 
   const handleAdd = async (data: Partial<Location>) => {
     try {
-      const response = await fetch('http://localhost:8001/ort', {
+      const response = await fetch('http://13.60.78.19:8001/ort', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

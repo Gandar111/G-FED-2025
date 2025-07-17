@@ -12,7 +12,7 @@ let router = express.Router();
 
 /* GET http://localhost:8000/ → Backend-Status anzeigen */
 router.get('/', function(req, res) {
-  res.send('Backend läuft auf http://localhost:8001');
+  res.send('Backend läuft auf http://13.60.78.19:8001');
 });
 
 module.exports = router;

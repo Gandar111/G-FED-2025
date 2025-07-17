@@ -25,7 +25,7 @@ const LocationCard: React.FC<Props> = ({ location, user, onDelete }) => {
   const navigate = useNavigate();
 
   const handleLike = () => {
-    fetch(`http://localhost:8001/ort/${location._id}/like`, {
+    fetch(`http://13.60.78.19:8001/ort/${location._id}/like`, {
       method: 'POST',
     })
       .then(res => res.json())
@@ -36,7 +36,7 @@ const LocationCard: React.FC<Props> = ({ location, user, onDelete }) => {
   const handleDelete = () => {
     if (!window.confirm(`Möchtest du "${location.name}" wirklich löschen?`)) return;
 
-    fetch(`http://localhost:8001/ort/${location._id}`, {
+    fetch(`http://13.60.78.19:8001/ort/${location._id}`, {
       method: 'DELETE',
     })
       .then(res => {
