@@ -5,7 +5,8 @@ const { ObjectId } = require("mongodb");
 
 // Verbindungsdaten zur Datenbank
 //const uri = "mongodb://locationdb_ghamdan:oIqaln3KH@mongodb1.f4.htw-berlin.de:27017/locationdb?authMechanism=DEFAULT";
-const uri = "mongodb+srv://ghamdan:yFuX83JCOJZv0eqX@cluster0.kdql6tk.mongodb.net/locationdb?retryWrites=true&w=majority";
+const uri = "mongodb+srv://ghamdan:x.net@cluster0.kdql6tk.mongodb.net/locationdb?retryWrites=true&w=majority";
+
 
 // Funktion zur Datenbankverbindung
 async function connectToDatabase() {
